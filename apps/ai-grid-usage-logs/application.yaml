@@ -31,12 +31,12 @@ spec:
     # configuration on the hub. Targeting the subchart renders only the store.
     # Its values are un-nested for the same reason.
     #
-    # main, not the feature-ai-grid branch the sibling apps track: that branch
-    # predates this subchart and carries 5 of its 15 files -- no
-    # store/lokistack.yaml, no store/object-storage.yaml, no values.schema.json
-    # -- so it cannot render the store at all. Retarget once it catches up.
-    - repoURL: https://github.com/opendatahub-io/odh-gitops.git
-      targetRevision: main
+    # The fork's branch, because spokePolicy.endpoint accepting an ACM hub
+    # template is not upstream yet. sharedcluster names
+    # opendatahub-io/odh-gitops@main; this branch overrides it so the fleet can
+    # actually render the store. Drop this commit once that PR merges.
+    - repoURL: https://github.com/jeffdyoung/odh-gitops.git
+      targetRevision: ai-grid-o11y-templated-endpoint
       path: charts/rhai-on-openshift-chart/charts/ai-grid-o11y-hub
       helm:
         releaseName: ai-grid-usage-logs
