@@ -36,6 +36,8 @@ components:
                 mode: Terminate
                 certificateRefs:
                   - name: maas-default-gateway-service-tls
+              # The MaaS consumer HTTPRoute must omit spec.hostnames.
+              # A hostname-specific route wins before path matching and can shadow inference and MaaS API routes.
               allowedRoutes:
                 namespaces:
                   from: Selector
