@@ -8,3 +8,43 @@ dependencies:
           - odh-trusted-ca-bundle
           - openshift-service-ca.crt
           - home-keycloak-ca
+
+components:
+  aigateway:
+    modelsAsAService:
+      gateway:
+        spec:
+          listeners:
+            - name: http
+              port: 80
+              protocol: HTTP
+              allowedRoutes:
+                namespaces:
+                  from: Selector
+                  selector:
+                    matchExpressions:
+                      - key: kubernetes.io/metadata.name
+                        operator: In
+                        values:
+                          - openshift-ingress
+                          - models-as-a-service
+                          - redhat-ai-gateway-infra
+            - name: https
+              port: 443
+              protocol: HTTPS
+              tls:
+                mode: Terminate
+                certificateRefs:
+                  - name: maas-default-gateway-service-tls
+              allowedRoutes:
+                namespaces:
+                  from: Selector
+                  selector:
+                    matchExpressions:
+                      - key: kubernetes.io/metadata.name
+                        operator: In
+                        values:
+                          - openshift-ingress
+                          - models-as-a-service
+                          - redhat-ai-gateway-infra
+                          - redhat-ods-applications
