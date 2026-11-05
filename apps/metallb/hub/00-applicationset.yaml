@@ -25,11 +25,11 @@ spec:
     spec:
       project: default
       sources:
-        - repoURL: https://github.com/ai-grid-cloud/ai-grid-cluster-gitops.git
-          targetRevision: HEAD
+        - repoURL: https://github.com/carlkyrillos/ai-grid-cluster-gitops.git
+          targetRevision: ckyrillohubspoke
           ref: values
-        - repoURL: https://github.com/ai-grid-cloud/ai-grid-cluster-gitops.git
-          targetRevision: HEAD
+        - repoURL: https://github.com/carlkyrillos/ai-grid-cluster-gitops.git
+          targetRevision: ckyrillohubspoke
           path: apps/metallb/chart
           helm:
             releaseName: metallb
